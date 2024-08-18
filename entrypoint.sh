@@ -1,14 +1,14 @@
 #!/bin/sh
 
-RANDOM_PORT=$(shuf -i 1000-9999 -n 1)
+PORT=$(shuf -i 1000-9999 -n 1)
 # Генерация случайного 4-значного числа
 # Печать сгенерированного порта
-echo "Случайный порт: ${RANDOM_PORT}"
+echo "Случайный порт: ${PORT}"
 
 # Загрузка переменной окружения с именем случайной директории
 chmod 777 /random_dir.env
 . /random_dir.env
-
+export PORT
 # Проверка существования директории и переход в нее
 if [ -d "${RANDOM_DIR}" ]; then
     cd "${RANDOM_DIR}"
@@ -27,4 +27,4 @@ else
 fi
 
 # Запуск основного процесса с указанием случайного порта
-exec python3 -m hikka --port $RANDOM_PORT
+exec python -m hikka --port "${PORT}"
