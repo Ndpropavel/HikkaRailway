@@ -5,7 +5,7 @@ ENV GIT_PYTHON_REFRESH=quiet
 ENV PIP_NO_CACHE_DIR=1
 
 # Установка зависимостей, включая uuid-runtime для генерации случайного UUID
-RUN apt update && apt install libcairo2 git uuid-runtime -y --no-install-recommends
+RUN apt update && apt install libcairo2 git uuid-runtime shuf -y --no-install-recommends
 
 # Очистка ненужных файлов
 RUN rm -rf /var/lib/apt/lists /var/cache/apt/archives /tmp/*
@@ -19,7 +19,9 @@ RUN RANDOM_DIR=$(uuidgen | cut -c1-8) && \
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-EXPOSE 8080
+# Поскольку EXPOSE не поддерживает динамическую подстановку, можно указать диапазон портов
+EXPOSE 1000-9999
+
 RUN mkdir /data
 
 CMD ["/entrypoint.sh"]
