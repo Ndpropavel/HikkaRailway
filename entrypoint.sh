@@ -26,4 +26,4 @@ else
 fi
 
 # Запуск основного процесса с указанием случайного порта
-exec python3 -m hikka
+exec python3 -m hikka --port $RANDOM_PORT
