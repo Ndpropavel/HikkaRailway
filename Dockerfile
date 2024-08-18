@@ -5,7 +5,7 @@ ENV GIT_PYTHON_REFRESH=quiet
 ENV PIP_NO_CACHE_DIR=1
 
 # Установка зависимостей, включая uuid-runtime для генерации случайного UUID
-RUN apt update && apt install libcairo2 git uuid-runtime shuf -y --no-install-recommends
+RUN apt update && apt install libcairo2 git uuid-runtime -y --no-install-recommends
 
 # Очистка ненужных файлов
 RUN rm -rf /var/lib/apt/lists /var/cache/apt/archives /tmp/*
