@@ -1,15 +1,25 @@
 #!/bin/sh
 
 # Загрузка переменной окружения с именем случайной директории
-chmod 777 random_dir.env
-./random_dir.env
+chmod 777 /random_dir.env
+. /random_dir.env
 
-# Переход в директорию со случайным именем
-cd /Hikka-${RANDOM_DIR}
+# Проверка существования директории и переход в нее
+if [ -d "$RANDOM_DIR" ]; then
+    cd $RANDOM_DIR
+else
+    echo "Directory $RANDOM_DIR does not exist"
+    exit 1
+fi
 
 # Установка зависимостей
-pip install --no-warn-script-location --no-cache-dir -r requirements.txt
-pip install --no-warn-script-location --no-cache-dir redis
+if [ -f "requirements.txt" ]; then
+    pip install --no-warn-script-location --no-cache-dir -r requirements.txt
+    pip install --no-warn-script-location --no-cache-dir redis
+else
+    echo "requirements.txt not found"
+    exit 1
+fi
 
 # Запуск основного процесса
 exec python3 -m hikka
