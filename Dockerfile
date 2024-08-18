@@ -20,7 +20,6 @@ COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 # Поскольку EXPOSE не поддерживает динамическую подстановку, можно указать диапазон портов
-EXPOSE 1000-9999
 
 RUN mkdir /data
 
