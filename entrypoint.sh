@@ -1,8 +1,6 @@
 #!/bin/sh
 
 # Генерация случайного 4-значного числа
-RANDOM_PORT=$(shuf -i 1000-9999 -n 1)
-
 # Печать сгенерированного порта
 echo "Случайный порт: ${RANDOM_PORT}"
 
@@ -28,4 +26,4 @@ else
 fi
 
 # Запуск основного процесса с указанием случайного порта
-exec python3 -m hikka --port "${RANDOM_PORT}"
+exec python3 -m hikka
