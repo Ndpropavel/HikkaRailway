@@ -15,15 +15,11 @@ RUN RANDOM_DIR=$(uuidgen | cut -c1-8) && \
     git clone https://github.com/hikariatama/Hikka /Hikka-${RANDOM_DIR} && \
     echo "RANDOM_DIR=${RANDOM_DIR}" > /random_dir.env
 
-# Загрузка переменной из файла окружения
-RUN . /random_dir.env
+# Копирование и выполнение скрипта для установки зависимостей
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
-# Используем переменную для перехода в директорию
-WORKDIR /Hikka-${RANDOM_DIR}
-
-RUN pip install --no-warn-script-location --no-cache-dir -r requirements.txt
-RUN pip install --no-warn-script-location --no-cache-dir redis
 EXPOSE 8080
 RUN mkdir /data
 
-CMD ["python3", "-m", "hikka"]
+CMD ["/entrypoint.sh"]
