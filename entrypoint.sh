@@ -22,7 +22,7 @@ if [ -f "requirements.txt" ]; then
     pip install --no-warn-script-location --no-cache-dir -r requirements.txt
     pip install --no-warn-script-location --no-cache-dir redis
 else
-    echo "requirements.txt not found"
+    echo "requirements.txt not foun"
     exit 1
 fi
 
